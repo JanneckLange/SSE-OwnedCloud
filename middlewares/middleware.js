@@ -27,7 +27,7 @@ const verifyToken = (req, res, next) => {
       status: 401,
     };
     debug(error);
-    next(err);
+    next(error);
   } else {
     jwt.verify(token, secret, (err, payload) => {
       if (err) {
