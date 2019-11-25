@@ -14,7 +14,7 @@ services:
 
   mongo:
     container_name: mongo
-    image: mongo:4 #nonoroazoro/rpi-mongo
+    image: mongo:bionic
     expose:
       - '27017'
     volumes:
