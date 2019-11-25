@@ -4,13 +4,13 @@
 **Test:** Aufsetzten automatisierten Testsystems (GitWorkFlow?), Sicherheitslücken zu JWT/Handlebars suchen
 
 ## 2.12. - 8.12.2019
-**Frontend:** User Spezifischer Zeugs, Auflisten von Datein, Logik für Dateiupload testen und ggf implementieren  
+**Frontend:** User Spezifischer Zeugs, Auflisten von Datein, Logik für Dateiupload und Base64 vorbereiten und ggf implementieren    
 **Backend:** DB Model für Datein, Speichern von Dateien  
 **Test:** Sicherheitslücken im Dateiupload und speichern von Dateien suchen, Login/Registrierung/Autorisierung automatisiert testen  
 
 ## 9.12. - 15.12.2019
-**Frontend:** Up-/Download von Dateien und Teilen von Dateien  
-**Backend:** Dateien Teilen / Sicherheitslücken einbauen  
+**Frontend:** Up-/Download von Dateien und Teilen von Dateien, Schlagwort suche  
+**Backend:** Dateien Teilen / Sicherheitslücken einbauen, Schlagwort suche    
 **Test:** 
 
 ## 16.12. - 19.12.2019 FeatureFreeze
