@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www"
+    "dev": "nodemon ./bin/www",
+    "format": "prettier --single-quote --trailing-comma=es5 --write '**/*.js'"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,6 +14,7 @@
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1"
   }
 }
