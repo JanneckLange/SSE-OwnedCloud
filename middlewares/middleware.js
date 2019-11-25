@@ -18,13 +18,14 @@ const redirectLogin = (req, res, next) => {
  * throw error if invalid or missing token
  */
 const verifyToken = (req, res, next) => {
-  const token = req.body.token || req.query.token || req.headers['authorization'];
+  const token =
+    req.body.token || req.query.token || req.headers['authorization'];
 
   if (!token) {
     let error = {
-      message: "no token",
-      status: 401
-    }
+      message: 'no token',
+      status: 401,
+    };
     debug(error);
     next(err);
   } else {
@@ -37,11 +38,11 @@ const verifyToken = (req, res, next) => {
         req.user = payload;
         next();
       }
-    })
+    });
   }
 };
 
 module.exports = {
   redirectLogin: redirectLogin,
-  verifyToken: verifyToken
+  verifyToken: verifyToken,
 };
