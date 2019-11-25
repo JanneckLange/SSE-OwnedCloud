@@ -38,4 +38,22 @@ app.use((err, req, res, next) => {
   res.render('error');
 });
 
+configureDatabase();
+
+function configureDatabase(){
+  mongoose.connect("",
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true
+      });
+  let db = mongoose.connection;
+
+  // Bind connection to error event (to get notification of connection errors)
+  db.on('error', console.error.bind(console, 'connection error: '));
+  db.once('open', function() {
+    // connected
+    console.log('MongoDB connected..');
+  });
+}
+
 module.exports = app;

@@ -1,4 +1,4 @@
-const playerModel = require('../models/playerModel');
+const playerModel = require('../models/userModel');
 const jwt = require('jsonwebtoken');
 
 async function registerPlayer(email, password, name) {
