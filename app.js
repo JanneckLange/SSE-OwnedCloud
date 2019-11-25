@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const config = require('./config/common');
 
 const app = express();
 
@@ -37,5 +38,23 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.render('error');
 });
+
+configureDatabase();
+
+function configureDatabase(){
+  mongoose.connect(config.database_docker,
+      {
+        useNewUrlParser: true,
+        useCreateIndex: true
+      });
+  let db = mongoose.connection;
+
+  // Bind connection to error event (to get notification of connection errors)
+  db.on('error', console.error.bind(console, 'connection error: '));
+  db.once('open', function() {
+    // connected
+    console.log('MongoDB connected..');
+  });
+}
 
 module.exports = app;
