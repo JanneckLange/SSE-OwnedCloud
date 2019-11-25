@@ -1,0 +1,3 @@
+{
+  "database_docker": "mongodb://mongo:27017/SEP"
+}
