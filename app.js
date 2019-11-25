@@ -6,6 +6,7 @@ const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const config = require('./config/common');
 
 const app = express();
 
@@ -41,7 +42,7 @@ app.use((err, req, res, next) => {
 configureDatabase();
 
 function configureDatabase(){
-  mongoose.connect("",
+  mongoose.connect(config.database_docker,
       {
         useNewUrlParser: true,
         useCreateIndex: true
