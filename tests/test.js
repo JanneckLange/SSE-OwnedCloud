@@ -2,9 +2,6 @@ const testFilesToRun = [
     './controllerTests/test-auth.js'
 ];
 
-describe('Backend test suite', () => {
-    testFilesToRun.forEach(function (path) {
-        let test = require(path);
-        test();
-    });
+testFilesToRun.forEach(function (path) {
+    require(path)();
 });

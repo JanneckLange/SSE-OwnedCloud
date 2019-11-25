@@ -1,17 +1,22 @@
 const authController = require('../../controllers/authController');
+const userModel = require('../../models/userModel');
 
 const chai = require('chai'),
     chaiHttp = require('chai-http'),
-    should = chai.should(),
     expect = chai.expect;
+
 chai.use(chaiHttp);
 
 module.exports = function (test_data, server) {
     describe('AuthController', function () {
         describe('registration', function () {
             it('should create a new user', (done) => {
-               expect(authController.registerUser("test@mail.de","1234","Max")).to.have.status(200);
-
+                const email = "test@mail.de";
+                authController.registerUser(email,"1234","Max").then(()=>{
+                    userModel.findOne({email: email}).lean().exec().then(user=>{
+                        expect(user).to.be.true;
+                    });
+                });
             });
         });
     });
