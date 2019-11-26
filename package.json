@@ -5,7 +5,8 @@
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",
-    "format": "prettier --single-quote --trailing-comma=es5 --write '**/*.js'"
+    "format": "prettier --single-quote --trailing-comma=es5 --write '**/*.js'",
+    "test": "nyc mocha --require babel-register tests/test.js --exit"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
@@ -13,10 +14,17 @@
     "express": "~4.16.1",
     "hbs": "~4.0.4",
     "http-errors": "~1.6.3",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.7.12",
     "morgan": "~1.9.1",
     "nodemon": "^2.0.1",
-    "mongoose": "^5.7.12",
     "prettier": "^1.19.1"
-
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^6.2.2",
+    "nyc": "^14.1.1",
+    "babel-register": "^6.26.0",
+    "chai-http": "^4.3.0"
   }
 }
