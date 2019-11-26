@@ -12,6 +12,16 @@ services:
     depends_on:
       - mongo
 
+  app-test:
+    container_name: node-test
+    build:
+      context: .
+      dockerfile: DockerTestFile
+    links:
+      - mongo
+    depends_on:
+      - mongo
+
   mongo:
     container_name: mongo
     image: mongo:bionic

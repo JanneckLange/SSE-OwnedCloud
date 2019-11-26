@@ -1,5 +1,5 @@
 {
   "database_docker": "mongodb://mongo:27017/SEP",
-  "database_test": "mongodb://192.168.99.100:27017/OwnedCloud-test",
+  "database_test": "mongodb://mongo:27017/OwnedCloud-test",
   "salt": "SALT"
 }
