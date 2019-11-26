@@ -8,7 +8,6 @@ const chai = require('chai'),
     chaiHttp = require('chai-http'),
     expect = chai.expect;
 
-
 chai.use(chaiHttp);
 
 module.exports = function (test_data, server) {
@@ -36,6 +35,10 @@ module.exports = function (test_data, server) {
                     });
                 });
             });
+
+            it('expect to fail (user already exist)', (done) => {
+                //todo
+            });
         });
 
         describe('login', function () {
@@ -57,11 +60,15 @@ module.exports = function (test_data, server) {
                 });
             });
 
-            it('expect to fail', (done) => {
+            it('expect to fail (wrong email)', (done) => {
                 authController.loginPlayer(userData.wrong_data.email[0], userData.user.password).then(token => {
                     expect(token).to.be.a('Error');
                     done();
                 });
+            });
+
+            it('expect to fail (wrong password)', (done) => {
+                //todo
             });
         });
     });
