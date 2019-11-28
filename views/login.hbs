@@ -1,12 +1,19 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <style>
-    body {font-family: Calibri;}
-    form {border: 3px solid #f1f1f1;}
+    body {
+      font-family: Calibri;
+    }
 
-    input[type=text], input[type=password] {
+    form {
+      border: 3px solid #f1f1f1;
+    }
+
+    input[type=text],
+    input[type=password] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -29,41 +36,41 @@
       opacity: 0.8;
     }
 
-    #link{
+    #link {
 
       color: white;
       font-size: 200%;
       background-color: cornflowerblue;
     }
-    h2{
+
+    h2 {
       background-color: cornflowerblue;
-      color:white;
+      color: white;
       font-size: 200%;
     }
-
-
   </style>
 </head>
+
 <body>
+  <h2><a href="index.html" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
 
-<h2><a href="index.html" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
+  <form action="/login" method="post">
 
-<form action="/login" method="post">
+    <div class="container">
+      <label for="email"><b>E-Mail</b></label>
+      <input type="text" placeholder="Enter email" name="email">
+      <br>
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="psw">
 
-  <div class="container">
-    <label for="email"><b>E-Mail</b></label>
-    <input type="text" placeholder="Enter email" name="email">
-<br>
-    <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw">
+      <button type="submit">Login</button>
 
-    <button type="submit">Login</button>
+    </div>
 
+  </form>
+  <div id="link" align="center">
+    <a href="register.html" style=" text-decoration: none;">...or register now </a>
   </div>
-
- </form>
-<div id="link" align="center">
-  <a href ="register.html" style=" text-decoration: none;">...or register now </a>
-</div>
 </body>
+
 </html>
