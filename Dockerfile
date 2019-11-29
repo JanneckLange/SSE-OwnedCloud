@@ -6,6 +6,7 @@ WORKDIR /usr/src/app
 COPY package*.json ./
 
 # Install the dependencies
+# TODO in production package-lock.json should be used
 RUN npm install
 
 # Copy server.js, etc...
