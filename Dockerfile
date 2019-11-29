@@ -1,5 +1,4 @@
 FROM node:13-alpine
-# FROM arm32v7/node
 
 WORKDIR /usr/src/app
 
@@ -11,9 +10,6 @@ RUN npm install
 
 # Copy server.js, etc...
 COPY . .
-
-# The port that the container will listen on
-EXPOSE 3000
 
 # Run the scripts command in the package.json
 CMD ["npm", "start"]
