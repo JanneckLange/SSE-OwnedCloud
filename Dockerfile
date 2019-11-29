@@ -3,7 +3,7 @@ FROM node:13-alpine
 WORKDIR /usr/src/app
 
 # Copy package.json to the WORKDIR
-COPY package.json .
+COPY package*.json ./
 
 # Install the dependencies
 RUN npm install
