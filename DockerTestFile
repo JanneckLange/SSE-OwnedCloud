@@ -12,8 +12,5 @@ RUN npm install
 # Copy server.js, etc...
 COPY . .
 
-# The port that the container will listen on
-EXPOSE 3000
-
 # Run the scripts command in the package.json
-CMD ["npm", "start"]
+CMD ["npm", "test"]

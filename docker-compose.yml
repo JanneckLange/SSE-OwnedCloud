@@ -1,4 +1,4 @@
-version: "3"
+version: '3'
 
 services:
   app:
@@ -6,18 +6,27 @@ services:
     restart: always
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
     links:
       - mongo
     depends_on:
       - mongo
-    command: ["npm", "${NPM_CMD:-start}"]
+
+  app-test:
+    container_name: node-test
+    build:
+      context: .
+      dockerfile: DockerTestFile
+    links:
+      - mongo
+    depends_on:
+      - mongo
 
   mongo:
     container_name: mongo
     image: mongo:bionic
     expose:
-      - "27017"
+      - '27017'
     volumes:
       - "db:/data/db"
 
