@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+{{#extend "style"}}
   <style>
     body {
       font-family: Calibri;
@@ -49,33 +45,29 @@
       font-size: 200%;
     }
   </style>
-</head>
+{{/extend}}
 
-<body>
-  <h2><a href="/" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
+<h2><a href="/" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
 
-  <form action="/register" method="post">
+<form action="/register" method="post">
 
-    <div class="container">
-      <label for="name"><b>Name</b></label>
-      <input type="text" placeholder="Enter Name" name="name">
-      <br>
-      <label for="email"><b>E-Mail</b></label>
-      <input type="text" placeholder="Enter email" name="email">
-      <br>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw">
-      <br>
-      <label for="cpsw"><b>Confirm password</b></label>
-      <input type="text" placeholder="Confirm Password" name="cpsw">
-      <br>
-      <button type="submit">Register</button>
+  <div class="container">
+    <label for="name"><b>Name</b></label>
+    <input type="text" placeholder="Enter Name" name="name">
+    <br>
+    <label for="email"><b>E-Mail</b></label>
+    <input type="text" placeholder="Enter email" name="email">
+    <br>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw">
+    <br>
+    <label for="cpsw"><b>Confirm password</b></label>
+    <input type="text" placeholder="Confirm Password" name="cpsw">
+    <br>
+    <button type="submit">Register</button>
 
-    </div>
-  </form>
-  <div id="link" align="center">
-    <a href="login" style="text-decoration: none">...or Log-in now </a>
   </div>
-</body>
-
-</html>
+</form>
+<div id="link" align="center">
+  <a href="login" style="text-decoration: none">...or Log-in now </a>
+</div>

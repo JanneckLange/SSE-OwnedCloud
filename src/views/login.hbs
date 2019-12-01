@@ -1,76 +1,68 @@
-<!DOCTYPE html>
-<html>
+{{#extend "style"}}
+<style>
+  body {
+    font-family: Calibri;
+  }
 
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Calibri;
-    }
+  form {
+    border: 3px solid #f1f1f1;
+  }
 
-    form {
-      border: 3px solid #f1f1f1;
-    }
+  input[type=text],
+  input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+  }
 
-    input[type=text],
-    input[type=password] {
-      width: 100%;
-      padding: 12px 20px;
-      margin: 8px 0;
-      display: inline-block;
-      border: 1px solid #ccc;
-      box-sizing: border-box;
-    }
+  button {
+    background-color: cornflowerblue;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+  }
 
-    button {
-      background-color: cornflowerblue;
-      color: white;
-      padding: 14px 20px;
-      margin: 8px 0;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-    }
+  button:hover {
+    opacity: 0.8;
+  }
 
-    button:hover {
-      opacity: 0.8;
-    }
+  #link {
 
-    #link {
+    color: white;
+    font-size: 200%;
+    background-color: cornflowerblue;
+  }
 
-      color: white;
-      font-size: 200%;
-      background-color: cornflowerblue;
-    }
+  h2 {
+    background-color: cornflowerblue;
+    color: white;
+    font-size: 200%;
+  }
+</style>
+{{/extend}}
 
-    h2 {
-      background-color: cornflowerblue;
-      color: white;
-      font-size: 200%;
-    }
-  </style>
-</head>
+<h2><a href="/" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
 
-<body>
-  <h2><a href="/" style="text-decoration: none; ">Owned Cloud&#9729;</a></h2>
+<form action="/login" method="post">
 
-  <form action="/login" method="post">
+  <div class="container">
+    <label for="email"><b>E-Mail</b></label>
+    <input type="text" placeholder="Enter email" name="email">
+    <br>
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw">
 
-    <div class="container">
-      <label for="email"><b>E-Mail</b></label>
-      <input type="text" placeholder="Enter email" name="email">
-      <br>
-      <label for="psw"><b>Password</b></label>
-      <input type="password" placeholder="Enter Password" name="psw">
+    <button type="submit">Login</button>
 
-      <button type="submit">Login</button>
-
-    </div>
-
-  </form>
-  <div id="link" align="center">
-    <a href="register" style=" text-decoration: none;">...or register now </a>
   </div>
-</body>
 
-</html>
+</form>
+<div id="link" align="center">
+  <a href="register" style=" text-decoration: none;">...or register now </a>
+</div>
