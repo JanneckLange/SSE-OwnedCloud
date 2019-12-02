@@ -14,8 +14,8 @@ services:
     depends_on:
       - mongo
     command: ["npm", "run", "${NPM_CMD:-start}"]
-    volumes:
-      - ./src/:/usr/src/app/src/
+#    volumes:
+#      - ./src/:/usr/src/app/src/
 
   mongo:
     container_name: mongo
