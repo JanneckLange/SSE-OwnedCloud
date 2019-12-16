@@ -1,22 +1,27 @@
-version: '3'
+# TODO add overrides for dev / prod. volumes should only be mounted in dev environment
+
+version: "3"
 
 services:
   app:
     container_name: node
-    restart: always
+    restart: "${CONTAINER_RESTART:-no}"
     build: .
     ports:
-      - '3000:3000'
+      - "3000:3000"
     links:
       - mongo
     depends_on:
       - mongo
+    command: ["npm", "run", "${NPM_CMD:-start}"]
+#    volumes:
+#      - ./src/:/usr/src/app/src/
 
   mongo:
     container_name: mongo
     image: mongo:bionic
     expose:
-      - '27017'
+      - "27017"
     volumes:
       - "db:/data/db"
 

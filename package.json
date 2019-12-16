@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www",
-    "dev": "nodemon ./bin/www",
-    "test": "set NODE_ENV=test && nyc mocha --require babel-register tests/*.js --exit"
+    "start": "node ./src/bin/www",
+    "dev": "nodemon ./src/bin/www",
+    "format": "prettier --single-quote --trailing-comma=es5 --write '**/*.js'",
+    "test": "nyc mocha --require babel-register ./src/tests/test.js --exit"
   },
   "dependencies": {
     "babel-register": "^6.26.0",
@@ -17,12 +18,14 @@
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.7.12",
     "morgan": "~1.9.1",
-    "nodemon": "^2.0.1"
+    "nodemon": "^2.0.1",
+    "prettier": "^1.19.1"
   },
   "devDependencies": {
     "chai": "^4.2.0",
+    "mocha": "^6.2.2",
     "nyc": "^14.1.1",
-    "chai-http": "^4.3.0",
-    "mocha": "^6.2.2"
+    "babel-register": "^6.26.0",
+    "chai-http": "^4.3.0"
   }
 }
