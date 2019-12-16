@@ -1,6 +1,8 @@
 let mongoose = require('mongoose'),
     Schema = mongoose.Schema;
 
+let ObjectID = Schema.Types.ObjectId;
+
 const user = new Schema({
     email: {
         type: String,
