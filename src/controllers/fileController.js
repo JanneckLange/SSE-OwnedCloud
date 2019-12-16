@@ -13,7 +13,7 @@ async function uploadFile(userID, fileB64, fileName) {
 
     let newFile = new fileModel(payload);
     let fileID;
-    await fileModel.save().then(file => fileID = file._id).catch(error => console.log(error));
+    await fileModel.save().then(file => fileID = file._id);
     if(!fileID) {
         return new Error("File upload failed!")
     }
