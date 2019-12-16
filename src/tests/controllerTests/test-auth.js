@@ -37,7 +37,10 @@ module.exports = function (test_data, server) {
             });
 
             it('expect to fail (user already exist)', (done) => {
-                //todo
+                authController.registerUser(userData.user.email, userData.user.password, userData.user.username).then((res) => {
+                    expect(res).to.be.a('Error');
+                    done();
+                });
             });
         });
 
@@ -68,7 +71,12 @@ module.exports = function (test_data, server) {
             });
 
             it('expect to fail (wrong password)', (done) => {
-                //todo
+                authController.registerUser(userData.user.email, userData.user.password, userData.user.username).then(() => {
+                    authController.loginUser(userData.wrong_data.email[0], userData.user.password).then(token => {
+                        expect(token).to.be.a('Error');
+                        done();
+                    });
+                });
             });
         });
     });
