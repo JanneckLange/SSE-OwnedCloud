@@ -1,10 +1,9 @@
-const playerModel = require('../models/userModel');
+const userModel = require('../models/userModel').user;
 const jwt = require('jsonwebtoken');
 
-async function registerPlayer(email, password, name) {
-    let user = await playerModel.findOne({email: email}).lean().exec();
+async function registerUser(email, password, name) {
+    let user = await userModel.findOne({email: email}).lean().exec();
     if (user) {
-        console.log('User with given email already exists.');
         return new Error('User with given email already exists.');
     }
     let payload = {
@@ -13,35 +12,36 @@ async function registerPlayer(email, password, name) {
         name: name
     };
 
-    let newUser = new playerModel(payload);
+    let newUser = new userModel(payload);
     await newUser.save().then(user => console.log(JSON.stringify(user))).catch(error => console.log(error));
-
 }
 
-async function loginPlayer(email, password){
+// TODO: Revisit error handling
+async function loginUser(email, password){
     if(!email) {
         return new Error("User name missing.");
     } else if(!password) {
         return new Error("Password missing.");
     }
     let searchCriteria = { email: email };
-    let player = playerModel.findOne(searchCriteria).exec();
-    return await player.then(processData);
+    let player = userModel.findOne(searchCriteria).exec();
+    return await player.then(checkLogin);
 
-    function processData(user) {
+    function checkLogin(user) {
         if(!user) {
-            return new Error("User does not exist.");
+            return new Error("Credentials incorrect");
         } else {
             let passwordCorrect = user.password === password;
 
             if (!passwordCorrect) {
-                return new Error("Wrong password.");
+                return new Error("Credentials incorrect");
             } else {
                 const payload = {
                     userId: user._id,
                     userName: user.name,
                     userEmail: user.email
                 };
+                // TODO: Change salt
                 return jwt.sign(payload, 'SALT');
             }
         }
@@ -49,6 +49,6 @@ async function loginPlayer(email, password){
 }
 
 module.exports = {
-    registerPlayer,
-    loginPlayer
+    registerUser,
+    loginUser
 };
