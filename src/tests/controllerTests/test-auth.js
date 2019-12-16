@@ -14,7 +14,7 @@ module.exports = function (test_data, server) {
     describe('AuthController', function () {
         describe('registration', function () {
             it('expect to create a new user', (done) => {
-                authController.registerPlayer(userData.user.email, userData.user.password, userData.user.username).then(() => {
+                authController.registerUser(userData.user.email, userData.user.password, userData.user.username).then(() => {
                     userModel.findOne({email: userData.user.email}).then(user => {
 
                         expect(user).to.be.an('object');
@@ -43,7 +43,7 @@ module.exports = function (test_data, server) {
 
         describe('login', function () {
             it('expect to return a valid token', (done) => {
-                authController.loginPlayer(userData.user.email, userData.user.password).then(token => {
+                authController.loginUser(userData.user.email, userData.user.password).then(token => {
 
                     expect(token).to.be.a('string');
 
@@ -61,7 +61,7 @@ module.exports = function (test_data, server) {
             });
 
             it('expect to fail (wrong email)', (done) => {
-                authController.loginPlayer(userData.wrong_data.email[0], userData.user.password).then(token => {
+                authController.loginUser(userData.wrong_data.email[0], userData.user.password).then(token => {
                     expect(token).to.be.a('Error');
                     done();
                 });
