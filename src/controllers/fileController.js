@@ -3,7 +3,7 @@ const userModel = require('../models/userModel').user;
 
 async function uploadFile(userID, fileB64, fileName) {
     // Get user who uploads file
-    let user = await userModel.findById({_id: userID}).lean().exec();
+    let user = await userModel.findById(userID).lean().exec();
 
     let payload = {
         owner: user,
