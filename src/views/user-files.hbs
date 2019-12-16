@@ -1,0 +1,37 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+<div style="display: flex">
+  <h2 style="margin: 0">
+    <a href="/" style="text-decoration: none; color: cornflowerblue">Owned Cloud&#9729;</a>
+  </h2>
+  <div style="display: flex; margin-left: auto">
+    <div>
+      <input type="text" maxlength="50" placeholder="File name">
+      <button>Search</button>
+    </div>
+    <div style="margin-left: 16px">
+      <input type="file">
+      <button>Upload</button>
+    </div>
+  </div>
+  <div style="margin-left: auto">
+    <b>
+      {{user.name}}
+    </b>
+    <button>Logout</button>
+  </div>
+</div>
+<hr />
+
+<h2>Files</h2>
+<ul>
+  {{#each files}}
+    <li style="display: flex; margin-bottom: 16px">
+      {{fileName}}
+      <div style="display: flex; margin-left: 16px; margin-top: -6px">
+        <a href=""><i class="material-icons">cloud_download</i></a>
+        <a href=""><i class="material-icons">share</i></a>
+      </div>
+    </li>
+  {{/each}}
+</ul>
