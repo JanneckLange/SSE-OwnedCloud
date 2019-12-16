@@ -41,3 +41,9 @@ async function getFileIDs(userID) {
     let user = await userModel.findOne({_id: userID}).lean().exec();
     return user.uploadedFiles;
 }
+
+module.exports = {
+    uploadFile,
+    getFile,
+    getFileIDs
+};
