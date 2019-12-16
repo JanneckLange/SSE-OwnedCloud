@@ -15,6 +15,10 @@ const user = new Schema({
     name: {
         type: String,
         required: true
+    },
+    role: {
+        type: String,
+        default: "u"
     }
 },
     {
