@@ -19,7 +19,21 @@ const user = new Schema({
     role: {
         type: String,
         default: "u"
-    }
+    },
+    uploadedFiles:
+        [
+            {
+                _id: {
+                    type: ObjectID,
+                    ref: 'file',
+                    required: true
+                },
+                fileName: {
+                    type: String,
+                    required: true
+                }
+            }
+        ]
 },
     {
     timestamps: true

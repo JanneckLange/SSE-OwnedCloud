@@ -9,9 +9,12 @@ const file = new Schema({
         ref: 'user',
         required: true
     },
+    fileName: {
+        type: String,
+        required: true
+    },
     content: {
-        data: Buffer,
-        contentType: String,
+        type: String,
         required: true
     },
     isPublic: {
@@ -35,5 +38,5 @@ const file = new Schema({
 });
 
 module.exports = {
-    user: mongoose.model('file', file)
+    file: mongoose.model('file', file)
 };

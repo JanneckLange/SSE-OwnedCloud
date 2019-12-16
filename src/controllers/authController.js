@@ -30,21 +30,19 @@ async function loginUser(email, password){
     function checkLogin(user) {
         if(!user) {
             return new Error("Credentials incorrect");
-        } else {
-            let passwordCorrect = user.password === password;
-
-            if (!passwordCorrect) {
-                return new Error("Credentials incorrect");
-            } else {
-                const payload = {
-                    userId: user._id,
-                    userName: user.name,
-                    userEmail: user.email
-                };
-                // TODO: Change salt
-                return jwt.sign(payload, 'SALT');
-            }
         }
+        let passwordCorrect = user.password === password;
+
+        if (!passwordCorrect) {
+            return new Error("Credentials incorrect");
+        }
+        const payload = {
+            userId: user._id,
+            userName: user.name,
+            userEmail: user.email
+        };
+        // TODO: Change salt
+        return jwt.sign(payload, 'SALT');
     }
 }
 
