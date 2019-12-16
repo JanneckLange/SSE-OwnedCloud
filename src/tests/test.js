@@ -1,5 +1,6 @@
 const testFilesToRun = [
-    './controllerTests/test-auth.js'
+    './controllerTests/test-auth.js',
+    './controllerTests/test-file.js'
 ];
 const mongoose = require('mongoose');
 
