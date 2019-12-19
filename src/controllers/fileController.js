@@ -17,12 +17,13 @@ async function uploadFile(userID, fileB64, fileName) {
     if(!fileID) {
         return new Error("File upload failed!")
     }
-    await userModel.findByIdAndUpdate(
+    let result = await userModel.findByIdAndUpdate(
         userID,
         {
             $push: {uploadedFiles: {_id: fileID, fileName: fileName}}
         }
     ).exec();
+    return result !== {};
 }
 
 async function getFile(userID, fileID) {
