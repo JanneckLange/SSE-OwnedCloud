@@ -39,7 +39,7 @@ router.post('/upload', async function(req, res, next) {
   let result = await fileController.uploadFile(userId, fileB64, fileName);
 
   if (result) {
-    res.status(200).redirect('/files').send();
+    res.status(200).redirect('back').send();
   } else {
     res.status(400).send(e.message);
   }
