@@ -59,6 +59,7 @@ router.get('/download/:fileID', async (req, res, next) => {
     return next(file);
   } else if (file) {
     res.set('Content-disposition', 'attachment; filename=' + file.fileName);
+    res.type(file.fileName);
     return res.send(Buffer.from(file.content, 'base64'));
   }
   return next();
