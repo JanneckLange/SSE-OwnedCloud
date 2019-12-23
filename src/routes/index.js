@@ -24,7 +24,7 @@ router.get('/files', async function(req, res, next) {
     user: {
       name: 'Testuser',
     },
-    files
+    files,
   });
 });
 

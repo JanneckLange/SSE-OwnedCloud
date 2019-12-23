@@ -20,20 +20,20 @@ app.set('view engine', 'hbs');
 var blocks = {};
 
 hbs.registerHelper('extend', function(name, context) {
-    var block = blocks[name];
-    if (!block) {
-        block = blocks[name] = [];
-    }
+  var block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
 
-    block.push(context.fn(this));
+  block.push(context.fn(this));
 });
 
 hbs.registerHelper('block', function(name) {
-    var val = (blocks[name] || []).join('\n');
+  var val = (blocks[name] || []).join('\n');
 
-    // clear the block
-    blocks[name] = [];
-    return val;
+  // clear the block
+  blocks[name] = [];
+  return val;
 });
 
 app.use(logger('dev'));
@@ -67,12 +67,11 @@ app.use((err, req, res, next) => {
 
 configureDatabase();
 
-function configureDatabase(){
-  mongoose.connect(config.database_docker,
-      {
-        useNewUrlParser: true,
-        useCreateIndex: true
-      });
+function configureDatabase() {
+  mongoose.connect(config.database_docker, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
   let db = mongoose.connection;
 
   // Bind connection to error event (to get notification of connection errors)

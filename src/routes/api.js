@@ -4,7 +4,7 @@ var authController = require('../controllers/authController');
 var fileController = require('../controllers/fileController');
 var jwt = require('jsonwebtoken');
 
-const COOKIE_ID = 'mlp_fanshop';
+const COOKIE_ID = require('../config/common').COOKIE_ID;
 
 // TODO Remember to sanitize inputs!
 router.post('/register', async function(req, res, next) {
@@ -24,22 +24,28 @@ router.post('/login', async function(req, res, next) {
 
   try {
     let jwt = await authController.loginUser(data.email, data.password);
-    res.status(200).cookie(COOKIE_ID, jwt).redirect('/files').send();
+    res
+      .status(200)
+      .cookie(COOKIE_ID, jwt)
+      .redirect('/files')
+      .send();
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
 
 router.post('/upload', async function(req, res, next) {
-  const jwt_data = jwt.decode(req.cookies[COOKIE_ID], 'SALT');
-  const userId = jwt_data.userId;
+  const userId = req.user.userId;
   const fileB64 = req.files.file.data.toString('base64');
   const fileName = req.files.file.name;
 
   let result = await fileController.uploadFile(userId, fileB64, fileName);
 
   if (result) {
-    res.status(200).redirect('back').send();
+    res
+      .status(200)
+      .redirect('back')
+      .send();
   } else {
     res.status(400).send(e.message);
   }
@@ -47,6 +53,7 @@ router.post('/upload', async function(req, res, next) {
 
 router.get('/download/:fileID', async (req, res, next) => {
   const userId = req.user.userId;
+  const file = await fileController.getFile(userId, req.params.fileID);
 
   if (file && file instanceof Error) {
     return next(file);
