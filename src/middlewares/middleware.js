@@ -6,12 +6,13 @@ const config = require('../config/common');
  * Do nothing if logged in
  */
 const redirectLogin = (req, res, next) => {
-  if (!req.user && req.path !== '/login') {
+  if (!req.user && !['/login', '/register', '/api/login', '/api/register'].includes(req.path)) {
     res.redirect('/login');
+    next();
   } else {
     next();
   }
-};
+}; 
 
 /**
  * Add req.user if jwt cookie found
