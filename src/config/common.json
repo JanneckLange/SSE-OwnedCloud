@@ -1,5 +1,6 @@
 {
   "database_docker": "mongodb://mongo:27017/ownedCloud",
   "database_test": "mongodb://mongo:27017/OwnedCloud-test",
-  "salt": "SALT"
+  "salt": "SALT",
+  "COOKIE_ID": "mlp_fanshop"
 }

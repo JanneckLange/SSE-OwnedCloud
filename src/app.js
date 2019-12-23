@@ -43,6 +43,9 @@ app.use(fileUpload({ debug: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use(require('./middlewares/middleware').decodeJWT);
+app.use(require('./middlewares/middleware').redirectLogin);
+
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
 

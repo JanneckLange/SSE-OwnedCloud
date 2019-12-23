@@ -45,4 +45,20 @@ router.post('/upload', async function(req, res, next) {
   }
 });
 
+router.get('/download/:fileID', async (req, res, next) => {
+  const userId = req.user.userId;
+
+  if (file && file instanceof Error) {
+    return next(file);
+  } else if (file) {
+    res.set('Content-disposition', 'attachment; filename=' + file.fileName);
+    return res.send(Buffer.from(file.content, 'base64'));
+  }
+  return next();
+});
+
+router.get('/files/list', async (req, res, next) =>
+  res.json(await fileController.listFiles(req.user.userId))
+);
+
 module.exports = router;

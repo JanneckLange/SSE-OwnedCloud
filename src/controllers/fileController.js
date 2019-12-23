@@ -27,20 +27,23 @@ async function uploadFile(userID, fileB64, fileName) {
 }
 
 async function getFile(userID, fileID) {
-    let searchCriteria = {_id: fileID};
-    let file = fileModel.findOne(searchCriteria).exec();
-    if(!file) {
-        return new Error("No such file..");
-    }
-    if(file.owner !== userID) {
-        return new Error("Not the owner..");
-    }
-    return file.content;
+  let file = await fileModel.findById(fileID).exec();
+
+  if (!file) {
+    return new Error('No such file..');
+  }
+  if (file.owner != userID) {
+    return new Error('Not the owner..');
+  }
+  return file;
 }
 
 async function listFiles(userID) {
-    let user = await userModel.findOne({_id: userID}).lean().exec();
-    return user.uploadedFiles;
+  const user = await userModel
+    .findById(userID)
+    .lean()
+    .exec();
+  return user.uploadedFiles;
 }
 
 module.exports = {
