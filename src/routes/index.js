@@ -22,7 +22,7 @@ router.get('/files', async function(req, res, next) {
 
   res.render('user-files', {
     user: {
-      name: 'Testuser',
+      name: jwt_data.userName,
     },
     files,
   });
