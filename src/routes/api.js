@@ -37,7 +37,7 @@ router.post('/login', async function(req, res, next) {
 router.post('/upload', async function(req, res, next) {
   const userId = req.user.userId;
   const fileB64 = req.files.file.data.toString('base64');
-  const fileName = req.files.file.name;
+  const fileName = decodeURIComponent(req.files.file.name);
 
   let result = await fileController.uploadFile(userId, fileB64, fileName);
 
