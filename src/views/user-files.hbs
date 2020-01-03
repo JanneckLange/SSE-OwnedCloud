@@ -6,8 +6,10 @@
   </h2>
   <div style="display: flex; margin-left: auto">
     <div>
-      <input type="text" maxlength="50" placeholder="File name">
-      <button>Search</button>
+      <form action="/files" method="get">
+        <input type="text" maxlength="50" placeholder="File name" name="query">
+        <button type="submit">Search</button>
+      </form>
     </div>
     <div style="margin-left: 16px">
       <form action="/api/upload" method="post" encType="multipart/form-data">

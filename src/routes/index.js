@@ -18,7 +18,14 @@ router.get('/register', function(req, res, next) {
 
 router.get('/files', async function(req, res, next) {
   let jwt_data = jwt.decode(req.cookies['mlp_fanshop'], 'SALT');
-  let files = await fileController.listFiles(jwt_data.userId);
+
+  let query = req.query.query;
+  let files;
+  if (!query) {
+    files = await fileController.listFiles(jwt_data.userId);
+  } else {
+    files = await fileController.searchFiles(jwt_data.userId, query);
+  }
 
   res.render('user-files', {
     user: {
