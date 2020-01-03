@@ -48,8 +48,17 @@ async function listFiles(userID) {
   return user.uploadedFiles;
 }
 
+async function searchFiles(userID, query) {
+  query = query && query.toString().toLowerCase();
+
+  return (await listFiles(userID)).filter(file =>
+    file.fileName.toLowerCase().includes(query.toLowerCase())
+  );
+}
+
 module.exports = {
   uploadFile,
   getFile,
   listFiles,
+  searchFiles,
 };

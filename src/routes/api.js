@@ -69,4 +69,8 @@ router.get('/files/list', async (req, res, next) =>
   res.json(await fileController.listFiles(req.user.userId))
 );
 
+router.get('/files/list/:query', async (req, res, next) =>
+  res.json(await fileController.searchFiles(req.user.userId, req.params.query))
+);
+
 module.exports = router;
