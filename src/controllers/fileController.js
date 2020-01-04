@@ -1,5 +1,7 @@
 const fileModel = require('../models/fileModel').file;
 const userModel = require('../models/userModel').user;
+const crypto = require('crypto');
+const salt = require('../config/common').salt_pbkdf2;
 
 async function uploadFile(userID, fileB64, fileName) {
   // Get user who uploads file
@@ -56,9 +58,32 @@ async function searchFiles(userID, query) {
   );
 }
 
+/* ### SHARING ### */
+
+/** Get file from sharing link */
+async function getFromLink(hash) {
+  return await fileModel.findOne({ publicLink: hash });
+}
+
+/** Create hash used for file sharing, return file */
+async function createLink(userId, fileId) {
+  const hash = crypto.pbkdf2Sync(fileId, salt, 100000, 64, 'sha512');
+  let file = await fileModel.findById(fileId);
+
+  file.isPublic = true;
+  file.publicLink = hash.toString('base64').replace(/[^a-zA-Z0-9]/g,'');
+  
+  await file.save();
+  file.content = undefined;
+  return file;
+}
+
 module.exports = {
   uploadFile,
   getFile,
   listFiles,
   searchFiles,
+
+  getFromLink,
+  createLink,
 };
