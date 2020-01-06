@@ -42,9 +42,7 @@ router.post('/upload', async function(req, res, next) {
   let result = await fileController.uploadFile(userId, fileB64, fileName);
 
   if (result) {
-    res
-      .status(200)
-      .redirect('/files')
+    res.status(200).redirect('/files');
   } else {
     res.status(400).send(e.message);
   }
@@ -57,30 +55,32 @@ router.get('/download/:fileID', async (req, res, next) => {
   if (file && file instanceof Error) {
     return next(file);
   } else if (file) {
-    return downloadFile(file)
-  }
-  return next();
-});
-
-router.route('/share/:file')
-  // Get file from sharing link
-  .get(async (req, res, next) => {
-    const file = await fileController.getFromLink(req.params.file);
-      
-    if (file) return downloadFile(file, res);
-    next()
-  })
-  // Create sharing link
-  .post((req, res, next) => {
-    fileController.createLink(req.user.userId, req.params.file)
-      .then(link => res.status(201).json(link))
-      .catch(e => next(e))
-  });
-
-  function downloadFile(file, res) {
     res.set('Content-disposition', 'attachment; filename=' + file.fileName);
     res.type(file.fileName);
     return res.send(Buffer.from(file.content, 'base64'));
   }
+  return next();
+});
+
+router
+  .route('/share/:file')
+  // Get file from sharing link
+  .get(async (req, res, next) => {
+    const file = await fileController.getFromLink(req.params.file);
+
+    if (file) {
+      res.set('Content-disposition', 'attachment; filename=' + file.fileName);
+      res.type(file.fileName);
+      return res.send(Buffer.from(file.content, 'base64'));
+    }
+    next();
+  })
+  // Create sharing link
+  .post((req, res, next) => {
+    fileController
+      .createLink(req.user.userId, req.params.file)
+      .then(link => res.status(201).json(link))
+      .catch(e => next(e));
+  });
 
 module.exports = router;

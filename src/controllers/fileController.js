@@ -47,7 +47,7 @@ async function listFiles(userID) {
     .findById(userID)
     .lean()
     .exec();
-  return user.uploadedFiles;
+  return user && user.uploadedFiles;
 }
 
 async function searchFiles(userID, query) {
@@ -71,8 +71,8 @@ async function createLink(userId, fileId) {
   let file = await fileModel.findById(fileId);
 
   file.isPublic = true;
-  file.publicLink = hash.toString('base64').replace(/[^a-zA-Z0-9]/g,'');
-  
+  file.publicLink = hash.toString('base64').replace(/[^a-zA-Z0-9]/g, '');
+
   await file.save();
   file.content = undefined;
   return file;

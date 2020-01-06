@@ -2,8 +2,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var fileController = require('../controllers/fileController');
-var isAdmin = require('../middlewares/middleware').isAdmin();
-
+var isAdmin = require('../middlewares/middleware').isAdmin;
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -37,9 +36,8 @@ router.get('/files', async function(req, res, next) {
   });
 });
 
-router.route('/admin')
-  .get(isAdmin, (req, res, next) => {
-    res.render('admin', {});
-  });
+router.route('/admin').get(isAdmin, (req, res, next) => {
+  res.render('admin', {});
+});
 
 module.exports = router;

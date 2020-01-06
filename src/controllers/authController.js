@@ -37,7 +37,7 @@ async function loginUser(email, password) {
       userId: user._id,
       userName: user.name,
       userEmail: user.email,
-      userRole: user.role
+      userRole: user.role,
     };
     // TODO: Change salt
     return jwt.sign(payload, 'SALT');
