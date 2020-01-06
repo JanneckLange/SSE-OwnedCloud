@@ -28,7 +28,20 @@ const decodeJWT = (req, res, next) => {
   next();
 };
 
+/**
+ * Check for user permission
+ */
+const isAdmin = (req, res, next) => {
+  if (req.user.role === 'a') {
+    return next();
+  } else {
+    res.redirect('/login');
+    next();
+  }
+};
+
 module.exports = {
-  decodeJWT: decodeJWT,
-  redirectLogin: redirectLogin,
+  decodeJWT,
+  redirectLogin,
+  isAdmin
 };
