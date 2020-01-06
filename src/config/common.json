@@ -1,6 +1,7 @@
 {
   "database_docker": "mongodb://mongo:27017/ownedCloud",
   "database_test": "mongodb://mongo:27017/OwnedCloud-test",
+  "database_local": "mongodb://127.0.0.1:27017/ownedCloud",
   "salt": "nduigfpnfumqiglnefipdnefdgiamefdemaen",
   "salt_pbkdf2": "nm8nq9e08e0n3x8e09098pe09an098q00",
   "COOKIE_ID": "mlp_fanshop"

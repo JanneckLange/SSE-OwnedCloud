@@ -67,7 +67,7 @@ router.route('/share/:file')
   .get(async (req, res, next) => {
     const file = await fileController.getFromLink(req.params.file);
       
-    if (file) return downloadFile(file, res)
+    if (file) return downloadFile(file, res);
     next()
   })
   // Create sharing link
@@ -75,7 +75,7 @@ router.route('/share/:file')
     fileController.createLink(req.user.userId, req.params.file)
       .then(link => res.status(201).json(link))
       .catch(e => next(e))
-  })
+  });
 
   function downloadFile(file, res) {
     res.set('Content-disposition', 'attachment; filename=' + file.fileName);
