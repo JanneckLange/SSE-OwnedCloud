@@ -13,7 +13,7 @@ router.post('/register', async function(req, res, next) {
 
   try {
     await authController.registerUser(data.email, data.password, data.name);
-    res.status(200).send('Sucessfully registered.');
+    res.status(200).redirect('/login');
   } catch (e) {
     res.status(400).send(e.message);
   }

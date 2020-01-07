@@ -75,7 +75,8 @@ async function createLink(userId, fileId) {
 
   await file.save();
   file.content = undefined;
-  return file;
+
+  return file.publicLink;
 }
 
 module.exports = {
