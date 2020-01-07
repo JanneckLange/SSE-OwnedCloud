@@ -18,21 +18,28 @@ const redirectLogin = (req, res, next) => {
 };
 
 /**
- * Add req.user if jwt cookie found
+ * verify token from cookie and add payload to req.user if successful
  */
-const decodeJWT = (req, res, next) => {
-  const data = jwt.decode(req.cookies[config.COOKIE_ID], config.SALT);
-
-  if (data) req.user = data;
-
-  next();
+function decodeJWT(req, res, next) { // 
+  let token = req.cookies[config.COOKIE_ID];
+console.log('token', token, req.cookies)
+  if(token) {
+    jwt.verify(token, config.salt, (err, payload) => {
+      if(err) {
+        res.status(403).json(err);
+      } else {
+        req.user = payload;
+        next();
+      }
+    });
+  } else { next() }
 };
 
 /**
  * Check for user permission
  */
 const isAdmin = (req, res, next) => {
-  if (req.user.role === 'a') {
+  if (req.user.userRole === 'a') {
     return next();
   } else {
     res.redirect('/login');

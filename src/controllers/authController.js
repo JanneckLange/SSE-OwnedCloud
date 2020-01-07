@@ -1,5 +1,7 @@
 const userModel = require('../models/userModel').user;
 const jwt = require('jsonwebtoken');
+const SALT = require('../config/common').salt;
+
 
 async function registerUser(email, password, name) {
   let user = await userModel
@@ -40,7 +42,7 @@ async function loginUser(email, password) {
       userRole: user.role,
     };
     // TODO: Change salt
-    return jwt.sign(payload, 'SALT');
+    return jwt.sign(payload, SALT);
   }
 }
 
