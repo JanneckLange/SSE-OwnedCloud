@@ -44,7 +44,7 @@
      let req = new XMLHttpRequest();
      req.onreadystatechange = () => { 
        if(req.readyState === XMLHttpRequest.DONE) {
-         prompt("Your download link:", req.responseText);
+         prompt("Your download link:", `${window.location.host}/share/${req.responseText.replace(/\"/g,'')}`);
        }
      }
      req.open('POST', `/api/share/${fileId}`, true);
