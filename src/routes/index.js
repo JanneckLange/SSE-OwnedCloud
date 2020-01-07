@@ -36,6 +36,17 @@ router.get('/files', async function(req, res, next) {
   });
 });
 
+router.get('/share/:id', async (req, res, next) => {
+  const file = await fileController.getFromLink(req.params.id);
+
+  if (file && file instanceof Error) {
+    return next(file);
+  } else if (file) {
+    res.render('share', { shareId: req.params.id, file })
+  }
+  return next();
+});
+
 router.route('/admin').get(isAdmin, (req, res, next) => {
   res.render('admin', {});
 });
