@@ -28,6 +28,9 @@
 
 <h2>Files</h2>
 <ul>
+  {{#if error}}
+    <div><h4>{{error}}</h4></div>
+  {{/if}}
   {{#each files}}
     <li style="display: flex; margin-bottom: 16px">
       {{{fileName}}}

@@ -22,17 +22,22 @@ router.get('/files', async function(req, res, next) {
 
   let query = req.query.query;
   let files;
+  let error;
+
   if (!query) {
     files = await fileController.listFiles(jwt_data.userId);
   } else {
     files = await fileController.searchFiles(jwt_data.userId, query);
   }
-
+  if (files && files instanceof Error) {
+    error = files;
+  }
   res.render('user-files', {
     user: {
       name: jwt_data.userName,
     },
     files,
+    error,
   });
 });
 
@@ -42,7 +47,7 @@ router.get('/share/:id', async (req, res, next) => {
   if (file && file instanceof Error) {
     return next(file);
   } else if (file) {
-    res.render('share', { shareId: req.params.id, file })
+    res.render('share', { shareId: req.params.id, file });
   }
   return next();
 });

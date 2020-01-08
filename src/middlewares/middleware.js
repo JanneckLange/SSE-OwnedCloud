@@ -20,20 +20,22 @@ const redirectLogin = (req, res, next) => {
 /**
  * verify token from cookie and add payload to req.user if successful
  */
-function decodeJWT(req, res, next) { // 
+function decodeJWT(req, res, next) {
   let token = req.cookies[config.COOKIE_ID];
-console.log('token', token, req.cookies)
-  if(token) {
+
+  if (token) {
     jwt.verify(token, config.salt, (err, payload) => {
-      if(err) {
+      if (err) {
         res.status(403).json(err);
       } else {
         req.user = payload;
         next();
       }
     });
-  } else { next() }
-};
+  } else {
+    next();
+  }
+}
 
 /**
  * Check for user permission
