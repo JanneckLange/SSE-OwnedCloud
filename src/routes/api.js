@@ -33,6 +33,10 @@ router.post('/login', async function(req, res, next) {
 });
 
 router.post('/upload', async function(req, res, next) {
+  if (!req.files || !req.files.file) {
+    return res.redirect('/files')
+  }
+
   const userId = req.user.userId;
   const fileB64 = req.files.file.data.toString('base64');
   const fileName = decodeURIComponent(req.files.file.name);
