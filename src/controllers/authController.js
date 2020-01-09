@@ -1,6 +1,7 @@
 const userModel = require('../models/userModel').user;
 const jwt = require('jsonwebtoken');
 const SALT = require('../config/common').salt;
+const SALT = require('../config/common').salt_jwt;
 
 async function registerUser(email, password, name) {
   let user = await userModel

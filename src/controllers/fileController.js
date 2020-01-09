@@ -1,7 +1,7 @@
 const fileModel = require('../models/fileModel').file;
 const userModel = require('../models/userModel').user;
 const crypto = require('crypto');
-const salt = require('../config/common').salt_pbkdf2;
+const salt = require('../config/common').salt_share;
 
 async function uploadFile(userID, fileB64, fileName) {
   // Get user who uploads file

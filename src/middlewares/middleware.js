@@ -24,7 +24,7 @@ function decodeJWT(req, res, next) {
   let token = req.cookies[config.COOKIE_ID];
 
   if (token) {
-    jwt.verify(token, config.salt, (err, payload) => {
+    jwt.verify(token, config.salt_jwt, (err, payload) => {
       if (err) {
         res.status(403).json(err);
       } else {
