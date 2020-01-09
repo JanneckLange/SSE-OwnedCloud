@@ -1,8 +1,12 @@
 const userModel = require('../models/userModel').user;
 const jwt = require('jsonwebtoken');
-const SALT = require('../config/common').salt;
+const crypto = require('crypto');
+const config = require('../config/common');
 
 async function registerUser(email, password, name) {
+  // recreate email hash
+  email = hash(email);
+
   let user = await userModel
     .findOne({ email: email })
     .lean()
@@ -11,11 +15,14 @@ async function registerUser(email, password, name) {
     throw new Error('User with given email already exists.');
   }
 
+  password = hash(password);
+
   let newUser = new userModel({
     email,
     password,
     name,
   });
+
   await newUser.save();
 }
 
@@ -25,12 +32,15 @@ async function loginUser(email, password) {
   } else if (!password) {
     throw new Error('Password missing.');
   }
+  // recreate hashes
+  email = hash(email);
+  password = hash(password);
 
-  let searchCriteria = { email };
   let user = await userModel
-    .findOne(searchCriteria)
+    .findOne({ email })
     .lean()
     .exec();
+
   if (!user || user.password !== password) {
     throw new Error('Credentials incorrect');
   } else {
@@ -40,9 +50,14 @@ async function loginUser(email, password) {
       userEmail: user.email,
       userRole: user.role,
     };
-    // TODO: Change salt
-    return jwt.sign(payload, SALT);
+    return jwt.sign(payload, config.salt_jwt);
   }
+}
+
+function hash(thing) {
+  return crypto
+    .pbkdf2Sync(thing, config.salt_user, 100000, 64, 'sha512')
+    .toString('base64');
 }
 
 module.exports = {
