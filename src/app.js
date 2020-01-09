@@ -5,6 +5,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const mongoose = require('mongoose');
 const hbs = require('hbs');
+const fileUpload = require('express-fileupload');
 
 const indexRouter = require('./routes/index');
 const apiRouter = require('./routes/api');
@@ -19,27 +20,31 @@ app.set('view engine', 'hbs');
 var blocks = {};
 
 hbs.registerHelper('extend', function(name, context) {
-    var block = blocks[name];
-    if (!block) {
-        block = blocks[name] = [];
-    }
+  var block = blocks[name];
+  if (!block) {
+    block = blocks[name] = [];
+  }
 
-    block.push(context.fn(this));
+  block.push(context.fn(this));
 });
 
 hbs.registerHelper('block', function(name) {
-    var val = (blocks[name] || []).join('\n');
+  var val = (blocks[name] || []).join('\n');
 
-    // clear the block
-    blocks[name] = [];
-    return val;
+  // clear the block
+  blocks[name] = [];
+  return val;
 });
 
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+app.use(fileUpload({ debug: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+app.use(require('./middlewares/middleware').decodeJWT);
+app.use(require('./middlewares/middleware').redirectLogin);
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
@@ -62,12 +67,11 @@ app.use((err, req, res, next) => {
 
 configureDatabase();
 
-function configureDatabase(){
-  mongoose.connect(config.database_docker,
-      {
-        useNewUrlParser: true,
-        useCreateIndex: true
-      });
+function configureDatabase() {
+  mongoose.connect(config.database_docker, {
+    useNewUrlParser: true,
+    useCreateIndex: true,
+  });
   let db = mongoose.connection;
 
   // Bind connection to error event (to get notification of connection errors)
