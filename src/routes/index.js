@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var fileController = require('../controllers/fileController');
+var userController = require('../controllers/userController');
 var isAdmin = require('../middlewares/middleware').isAdmin;
 
 /* GET home page. */
@@ -51,8 +52,10 @@ router.get('/share/:id', async (req, res, next) => {
   return next();
 });
 
-router.route('/admin').get(isAdmin, (req, res, next) => {
-  res.render('admin', {});
+router.route('/admin').get(async (req, res, next) => {
+  const users = await userController.list();
+  console.log(users);
+  res.render('admin', { users });
 });
 
 module.exports = router;

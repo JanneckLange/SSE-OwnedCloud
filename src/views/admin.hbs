@@ -18,7 +18,14 @@ html, body {
 }
 </style>
 
-<div style="height: 100%">
-  <img id="epic" style="height: 100%; display: block; margin: 0 auto; padding: 5vh 5vh" src="/img/success.gif" alt="">
-  <span style="position: absolute; width: 800px; margin: 0 auto; left: 0; right: 0; top: 10vh; display: block; font-size: 100px; color: rgba(255,0,255,1); font-family: Comic Sans MS,Verdana,Helvetica;">Ziel erreicht.</span>
+<div style="width:100%;height:100%;display:flex">
+  <img id="epic" style="display: block; padding: 5vh; width: 100%" src="/img/success.gif" alt="">
+  <div style="width: 100%; color: rgba(255,0,255,1); font-size: 32px; padding: 5vh; background-color: rgba(0,0,0,.6)">
+    <h1 style="margin:0; padding: 0;">Registered users</h1>
+    <ul>
+      {{#each users}}
+        <li>{{name}}</li>
+      {{/each}}
+    </ul>
+  </div>
 </div>
