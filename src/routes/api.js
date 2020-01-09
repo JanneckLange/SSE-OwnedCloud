@@ -1,9 +1,9 @@
-var express = require('express');
-var router = express.Router();
-var authController = require('../controllers/authController');
-var fileController = require('../controllers/fileController');
-var jwt = require('jsonwebtoken');
-
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+const fileController = require('../controllers/fileController');
+const userController = require('../controllers/userController');
+const isAdmin = require('../middlewares/middleware').isAdmin;
 const COOKIE_ID = require('../config/common').COOKIE_ID;
 
 // TODO Remember to sanitize inputs!
@@ -80,5 +80,9 @@ router
       .then(link => res.status(201).json(link))
       .catch(e => next(e));
   });
+
+router.route('/admin/users').get(isAdmin, async (req, res, next) => {
+  res.json(await userController.list())
+})
 
 module.exports = router;
