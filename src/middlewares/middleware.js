@@ -45,7 +45,6 @@ const isAdmin = (req, res, next) => {
     return next();
   } else {
     res.redirect('/login');
-    next();
   }
 };
 
