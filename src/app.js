@@ -69,8 +69,9 @@ configureDatabase();
 
 function configureDatabase() {
   mongoose.connect(config.database_docker, {
-    useNewUrlParser: true,
     useCreateIndex: true,
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
   });
   let db = mongoose.connection;
 

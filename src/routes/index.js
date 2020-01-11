@@ -1,6 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var jwt = require('jsonwebtoken');
 var fileController = require('../controllers/fileController');
 var isAdmin = require('../middlewares/middleware').isAdmin;
 
@@ -18,21 +17,26 @@ router.get('/register', function(req, res, next) {
 });
 
 router.get('/files', async function(req, res, next) {
-  let jwt_data = jwt.decode(req.cookies['mlp_fanshop'], 'SALT');
+  const user = req.user;
 
   let query = req.query.query;
   let files;
-  if (!query) {
-    files = await fileController.listFiles(jwt_data.userId);
-  } else {
-    files = await fileController.searchFiles(jwt_data.userId, query);
-  }
+  let error;
 
+  if (!query) {
+    files = await fileController.listFiles(user.userId);
+  } else {
+    files = await fileController.searchFiles(user.userId, query);
+  }
+  if (files && files instanceof Error) {
+    error = files;
+  }
   res.render('user-files', {
     user: {
-      name: jwt_data.userName,
+      name: user.userName,
     },
     files,
+    error,
   });
 });
 

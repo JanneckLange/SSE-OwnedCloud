@@ -1,7 +1,7 @@
 const fileModel = require('../models/fileModel').file;
 const userModel = require('../models/userModel').user;
 const crypto = require('crypto');
-const salt = require('../config/common').salt_pbkdf2;
+const salt = require('../config/common').salt_share;
 
 async function uploadFile(userID, fileB64, fileName) {
   // Get user who uploads file
@@ -43,19 +43,22 @@ async function getFile(userID, fileID) {
 }
 
 async function listFiles(userID) {
-  const user = await userModel
-    .findById(userID)
-    .lean()
-    .exec();
-  return user && user.uploadedFiles;
+  return await fileModel.find({ owner: userID });
 }
 
 async function searchFiles(userID, query) {
   query = query && query.toString().toLowerCase();
 
-  return (await listFiles(userID)).filter(file =>
-    file.fileName.toLowerCase().includes(query.toLowerCase())
+  const files = await fileModel.find(
+    { owner: userID, fileName: { $regex: query, $options: '$i' } },
+    { content: 0 }
   );
+
+  return files.length
+    ? files
+    : new Error(
+        `Could not find any entries for 'db.files.find({owner: ${userID}, fileName: {$regex: ${query}, $options: "$i"}}, {content: 0})'`
+      );
 }
 
 /* ### SHARING ### */

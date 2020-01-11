@@ -65,7 +65,7 @@ module.exports = function(test_data, server) {
           .then(token => {
             expect(token).to.be.a('string');
 
-            jwt.verify(token, config.salt, (error, decoded) => {
+            jwt.verify(token, config.salt_jwt, (error, decoded) => {
               expect(decoded).to.be.a('object');
 
               expect(decoded)

@@ -9,7 +9,6 @@ const COOKIE_ID = require('../config/common').COOKIE_ID;
 // TODO Remember to sanitize inputs!
 router.post('/register', async function(req, res, next) {
   let data = req.body;
-  console.log(data);
 
   try {
     await authController.registerUser(data.email, data.password, data.name);
@@ -27,14 +26,17 @@ router.post('/login', async function(req, res, next) {
     res
       .status(200)
       .cookie(COOKIE_ID, jwt)
-      .redirect('/files')
-      .send();
+      .redirect('/files');
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
 
 router.post('/upload', async function(req, res, next) {
+  if (!req.files || !req.files.file) {
+    return res.redirect('/files')
+  }
+
   const userId = req.user.userId;
   const fileB64 = req.files.file.data.toString('base64');
   const fileName = decodeURIComponent(req.files.file.name);
