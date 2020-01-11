@@ -65,7 +65,11 @@ async function searchFiles(userID, query) {
 
 /** Get file from sharing link */
 async function getFromLink(hash) {
-  return await fileModel.findOne({ publicLink: hash });
+  try {
+    hash = JSON.parse(hash);
+    console.log("parsed: " + JSON.stringify(hash))
+  } catch {}
+  return await fileModel.find({ publicLink: hash });
 }
 
 /** Create hash used for file sharing, return file */

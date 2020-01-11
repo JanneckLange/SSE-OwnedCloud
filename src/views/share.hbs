@@ -1,3 +1,5 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-{{{file.fileName}}}
-<a href="/api/share/{{shareId}}"><i class="material-icons">cloud_download</i></a>
+{{#each file}}
+{{{fileName}}}
+<a href="/api/share/{{publicLink}}"><i class="material-icons">cloud_download</i></a>
+{{/each}}

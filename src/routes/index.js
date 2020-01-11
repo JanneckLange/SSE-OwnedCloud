@@ -46,7 +46,7 @@ router.get('/share/:id', async (req, res, next) => {
   if (file && file instanceof Error) {
     return next(file);
   } else if (file) {
-    res.render('share', { shareId: req.params.id, file });
+    res.render('share', { file })
   }
   return next();
 });
