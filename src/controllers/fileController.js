@@ -66,19 +66,7 @@ async function getFromLink(hash) {
     hash = JSON.parse(hash);
     console.log("parsed: " + JSON.stringify(hash))
   } catch {}
-  let payload = [];
-  let docs = await fileModel.find({ publicLink: hash });
-  for(let i in docs) {
-    let element = docs[i];
-
-    let entry = {
-      fileName: element.fileName,
-      publicLink: element.publicLink,
-      content: element.content
-    };
-    payload.push(entry);
-  }
-  return payload;
+  return await fileModel.find({ publicLink: hash });
 }
 
 /** Create hash used for file sharing, return file */
