@@ -67,11 +67,10 @@ router
   // Get file from sharing link
   .get(async (req, res, next) => {
     const file = await fileController.getFromLink(req.params.file);
-
-    if (file) {
-      res.set('Content-disposition', 'attachment; filename=' + file.fileName);
-      res.type(file.fileName);
-      return res.send(Buffer.from(file.content, 'base64'));
+    if (file[0]) {
+      res.set('Content-disposition', 'attachment; filename=' + file[0].fileName);
+      res.type(file[0].fileName);
+      return res.send(Buffer.from(file[0].content, 'base64'));
     }
     next();
   })
