@@ -6,8 +6,8 @@
   </h2>
   <div style="display: flex; margin-left: auto">
     <div>
-      <form action="/files" method="get">
-        <input type="text" maxlength="50" placeholder="File name" name="query">
+      <form name="search" action="/files" method="get" onsubmit="buildQuery();">
+        <input type="text" maxlength="10" placeholder="File name" name="query">
         <button type="submit">Search</button>
       </form>
     </div>
@@ -52,5 +52,11 @@
      }
      req.open('POST', `/api/share/${fileId}`, true);
      req.send();
+   }
+
+   function buildQuery() {
+     const query = document.getElementById("query");
+     document.search.query.value = `{ "fileName": {"$regex": "${document.search.query.value}", "$options": "$i"}, "owner": "OWNER_ID" }`;
+     return true;
    }
  </script>

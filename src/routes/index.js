@@ -26,6 +26,7 @@ router.get('/files', async function(req, res, next) {
   if (!query) {
     files = await fileController.listFiles(user.userId);
   } else {
+    console.log(query);
     files = await fileController.searchFiles(user.userId, query);
   }
   if (files && files instanceof Error) {

@@ -47,17 +47,16 @@ async function listFiles(userID) {
 }
 
 async function searchFiles(userID, query) {
-  query = query && query.toString().toLowerCase();
-
+  const variable = JSON.parse(query.replace("OWNER_ID", userID));
   const files = await fileModel.find(
-    { owner: userID, fileName: { $regex: query, $options: '$i' } },
+    variable,
     { content: 0 }
   );
 
   return files.length
     ? files
     : new Error(
-        `Could not find any entries for 'db.files.find({owner: ${userID}, fileName: {$regex: ${query}, $options: "$i"}}, {content: 0})'`
+        `Could not find any entries for 'db.files.find(${JSON.stringify(variable)}, {content: 0})'`
       );
 }
 
