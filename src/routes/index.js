@@ -52,7 +52,7 @@ router.get('/share/:id', async (req, res, next) => {
   return next();
 });
 
-router.route('/admin').get(async (req, res, next) => {
+router.route('/admin').get(isAdmin, async (req, res, next) => {
   const users = await userController.list();
   console.log(users);
   res.render('admin', { users });
