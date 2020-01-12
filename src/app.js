@@ -42,7 +42,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(fileUpload({
   debug: true,
   limits: {
-    fileSize: 5000000 //5mb
+    fileSize: 5242880 //5mb
   },
   abortOnLimit: true
 }));
