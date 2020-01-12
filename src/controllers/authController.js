@@ -47,10 +47,9 @@ async function loginUser(email, password) {
     const payload = {
       userId: user._id,
       userName: user.name,
-      userEmail: user.email,
       userRole: user.role,
     };
-    return jwt.sign(payload, config.salt_jwt);
+    return jwt.sign(payload, config.salt_jwt, { expiresIn: config.TOKEN_EXPIRY_SECONDS });
   }
 }
 
