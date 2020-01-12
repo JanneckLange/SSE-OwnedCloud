@@ -5,6 +5,7 @@ const fileController = require('../controllers/fileController');
 const userController = require('../controllers/userController');
 const isAdmin = require('../middlewares/middleware').isAdmin;
 const COOKIE_ID = require('../config/common').COOKIE_ID;
+const config = require('../config/common');
 
 // TODO Remember to sanitize inputs!
 router.post('/register', async function(req, res, next) {
@@ -23,7 +24,7 @@ router.post('/login', async function(req, res, next) {
 
   try {
     let jwt = await authController.loginUser(data.email, data.password);
-    let expireDate = new Date(Date.now() + 900000);
+    let expireDate = new Date(Date.now() + config.TOKEN_EXPIRY_SECONDS * 1000);
     res
       .status(200)
       .cookie(COOKIE_ID, jwt, { expires: expireDate})
