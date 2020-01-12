@@ -5,5 +5,6 @@
   "salt_jwt": "SSE",
   "salt_share": "nm8nq9e08e0n3x8e09098pe09an098q00",
   "salt_user": "DMNgmnd8r9e8rhoRNETM3243609809m8q0ria8qoheinae",
-  "COOKIE_ID": "mlp_fanshop"
+  "COOKIE_ID": "mlp_fanshop",
+  "TOKEN_EXPIRY_SECONDS": 900
 }
