@@ -74,7 +74,7 @@ app.use((err, req, res, next) => {
 configureDatabase();
 
 function configureDatabase() {
-  mongoose.connect(config.database_local, {
+  mongoose.connect(config.database_docker, {
     useCreateIndex: true,
     useNewUrlParser: true,
     useUnifiedTopology: true,
