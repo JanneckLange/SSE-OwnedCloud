@@ -23,9 +23,10 @@ router.post('/login', async function(req, res, next) {
 
   try {
     let jwt = await authController.loginUser(data.email, data.password);
+    let expireDate = new Date(Date.now() + 900000);
     res
       .status(200)
-      .cookie(COOKIE_ID, jwt)
+      .cookie(COOKIE_ID, jwt, { expires: expireDate})
       .redirect('/files');
   } catch (e) {
     res.status(400).send(e.message);
@@ -36,7 +37,6 @@ router.post('/upload', async function(req, res, next) {
   if (!req.files || !req.files.file) {
     return res.redirect('/files')
   }
-
   const userId = req.user.userId;
   const fileB64 = req.files.file.data.toString('base64');
   const fileName = decodeURIComponent(req.files.file.name);
