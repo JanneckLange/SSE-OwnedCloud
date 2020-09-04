@@ -1,4 +1,7 @@
 # Readme
+## Project
+This project is meant to have security issues as a playground for pentesters! There should be a total of five security issues. If you find more..you are good :)
+
 ## Starting the dev environment
 `docker-compose up`  
 
